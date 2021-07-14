@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>スキニング</title>
+</head>
+<body>
+
+
+<script id="vs" type="x-shader/x-vertex">#version 300 es
+  // 入力
+  layout (location = 0) in  vec3 position;
+  layout (location = 1) in  vec4 color;
+  
+  layout (std140) uniform scene {
+    mat4 mVP;
+  } u_scene;
+
+  layout (std140) uniform object {
+    mat4 mWorld;
+  } u_obj;
+
+  
+  // 出力
+  out vec4 vColor;
+
+  void main() {
+    vColor = color;
+    vec4 w_pos = u_obj.mWorld * vec4(position, 1.0);
+    gl_Position = u_scene.mVP * w_pos;
+  }
+</script>
+
+<script id="vs_skin" type="x-shader/x-vertex">#version 300 es
+  // スキンメッシュ
+  // 入力
+  layout (location = 0) in  vec3 position;
+  layout (location = 1) in  vec4 color;
+  layout (location = 2) in  float weight0; // ボーン0の重み。ボーン1の重みは、1.0-weight0
+  
+  layout (std140) uniform scene {
+    mat4 mVP;
+  } u_scene;
+
+  layout (std140) uniform bone {
+    mat4 mWorld0;
+    mat4 mWorld1;
+  } u_obj;
+  
+  // 出力
+  out vec4 vColor;
+
+  void main() {
+    vColor = color;
+    vec4 w_pos = vec4(position, 1.0);
+    float weight1 = 1.0-weight0;
+    w_pos = weight0 * (u_obj.mWorld0 * w_pos)
+          + weight1 * (u_obj.mWorld1 * w_pos);
+    gl_Position = u_scene.mVP * w_pos;
+  }
+</script>
+
+<script id="fs" type="x-shader/x-fragment">#version 300 es
+precision highp float;// float 精度（低くしない）
+
+// 入力
+in vec4 vColor;
+
+// 出力
+out vec4 fragmentColor;
+
+void main() {
+    fragmentColor = vColor;
+}
+</script>
+
+  <canvas id="canvas"></canvas>
+  <script src="https://wgld.org/j/minMatrix.js" type="text/javascript"></script>
+  <script src="script.js" type="text/javascript"></script>
+</body>
+</html>
