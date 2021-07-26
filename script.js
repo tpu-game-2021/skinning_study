@@ -281,7 +281,8 @@ onload = function()
       a_wMatrix[0] = a_lMatrix[0];
 	    
 	    
-      a_wMatrix[1] = a_wMatrix[0]　* a_lMatrix[1] * a_bMatrixInv[1];
+      a_wMatrix[1] = a_wMatrix[0]　* a_lMatrix[1];
+      a_wMatrix[1] *= a_bMatrixInv[1];
 	    
       // モデル描画
       gl.useProgram(prg_skin);
