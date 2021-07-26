@@ -280,7 +280,8 @@ onload = function()
 
       // モデルのワールド行列の生成【ここをなんとかする】
       a_wMatrix[0] = a_lMatrix[0];
-      a_wMatrix[1] = a_wMatrix[0]  * a_lMatrix[0] * a_bMatrixInv[0]-1;
+      a_wMatrix[1] = a_wMatrix[0];
+      //a_wMatrix[1] = a_wMatrix[0]  * a_lMatrix[0] * a_bMatrixInv[0]-1;
 	    
           
       // モデル描画
