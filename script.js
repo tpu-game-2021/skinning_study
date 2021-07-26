@@ -239,8 +239,8 @@ onload = function()
     // メッシュの行列の初期化
     a_bMatrix[0]  = mat.identity(mat.create());
     a_bMatrix[1]  = mat.identity(mat.create());
-    a_bMatrixInv[0]  = mat.identity(mat.create());
-    a_bMatrixInv[1]  = mat.identity(mat.create());
+    //a_bMatrixInv[0]  = mat.identity(mat.create());
+    //a_bMatrixInv[1]  = mat.identity(mat.create());
     a_lMatrix[0]  = mat.identity(mat.create());
     a_lMatrix[1]  = mat.identity(mat.create());
     a_wMatrix[0]  = mat.identity(mat.create());
@@ -248,7 +248,7 @@ onload = function()
     mat.translate(a_lMatrix[0], [0.0, -0.5, 0.0], a_lMatrix[0]);// 少し下に下げる
     mat.translate(a_bMatrix[1], [0.0, +0.5, 0.0], a_bMatrix[1]);// 骨はu方向に0.5
 　　//a_bMatrixInv[1] = Inverse(a_bMatrix[1]);
-    mat.inverse(a_bMatrix[1], a_bMatrixInv[1]);
+    //mat.inverse(a_bMatrix[1], a_bMatrixInv[1]);
 
     gl.enable(gl.DEPTH_TEST);
     
@@ -282,7 +282,7 @@ onload = function()
       a_wMatrix[0] = a_lMatrix[0];
 	    
 	    
-      a_wMatrix[1] = a_wMatrix[0] * a_lMatrix[1] * a_bMatrixInv[1];
+      a_wMatrix[1] = a_wMatrix[0]; //* a_lMatrix[1] * a_bMatrixInv[1];
 	    
       // モデル描画
       gl.useProgram(prg_skin);
