@@ -248,7 +248,7 @@ onload = function()
     mat.translate(a_lMatrix[0], [0.0, -0.5, 0.0], a_lMatrix[0]);// 少し下に下げる
     mat.translate(a_bMatrix[1], [0.0, +0.5, 0.0], a_bMatrix[1]);// 骨はu方向に0.5
 	
-    mat.inverse(a_bMatrixInv[1],[0.0, +0.5, 0.0],a_bMatrixInv[1]);
+    //mat.inverse(a_bMatrixInv[1],[0.0, +0.5, 0.0],a_bMatrixInv[1]);
 	
     gl.enable(gl.DEPTH_TEST);
     
