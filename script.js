@@ -16,7 +16,7 @@ onload = function()
 
     var mat = new matIV();
     var a_bMatrix = [];// バインド行列
-    var a_bMatrixInv = [];// 逆バインド行列
+    //var a_bMatrixInv = [];// 逆バインド行列
     var a_lMatrix = [];// ローカル行列
     var a_wMatrix = [];// ワールド行列
     var vpMatrix;
