@@ -16,7 +16,8 @@ onload = function()
 
     var mat = new matIV();
     var a_bMatrix = [];// バインド行列
-    var a_lMatrix = [];// ローカル行列
+    var a_bMatrixInv = [];	
+    var a_lMatrix = [];// ローカル行列	
     var a_wMatrix = [];// ワールド行列
     var vpMatrix;
 
@@ -238,13 +239,17 @@ onload = function()
     // メッシュの行列の初期化
     a_bMatrix[0]  = mat.identity(mat.create());
     a_bMatrix[1]  = mat.identity(mat.create());
+    a_bMatrixInv[0]  = mat.identity(mat.create());
+    a_bMatrixInv[1]  = mat.identity(mat.create());
     a_lMatrix[0]  = mat.identity(mat.create());
     a_lMatrix[1]  = mat.identity(mat.create());
     a_wMatrix[0]  = mat.identity(mat.create());
     a_wMatrix[1]  = mat.identity(mat.create());
     mat.translate(a_lMatrix[0], [0.0, -0.5, 0.0], a_lMatrix[0]);// 少し下に下げる
     mat.translate(a_bMatrix[1], [0.0, +0.5, 0.0], a_bMatrix[1]);// 骨はu方向に0.5
-
+	
+    //mat.inverse(a_bMatrixInv[1],[0.0, +0.5, 0.0],a_bMatrixInv[1]);
+	
     gl.enable(gl.DEPTH_TEST);
     
     var frames = 0;
@@ -276,7 +281,9 @@ onload = function()
       // モデルのワールド行列の生成【ここをなんとかする】
       a_wMatrix[0] = a_lMatrix[0];
       a_wMatrix[1] = a_wMatrix[0];
+      //a_wMatrix[1] = a_wMatrix[0]  * a_lMatrix[0] * a_bMatrixInv[0]-1;
 	    
+          
       // モデル描画
       gl.useProgram(prg_skin);
 
